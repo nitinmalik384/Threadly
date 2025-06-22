@@ -1,146 +1,129 @@
-# 🚀 Buzzspace
+# 🧵 Threadly
 
-Buzzspace is a real-time, event-driven messaging platform built using microservices architecture. It enables users to collaborate through threaded conversations, channel-based messaging, file sharing, and real-time notifications — all backed by a scalable and distributed infrastructure.
+Threadly is a modern, real-time, event-driven messaging platform designed with microservices architecture. It empowers teams and communities to collaborate via channel-based messaging, threaded conversations, file sharing, and instant notifications.
 
-> 🧠 Designed for scalability, reliability, and speed — powered by Kafka, Kubernetes, Docker, and AWS.
-
----
-
-## ✨ Features
-
-- 🔐 JWT-based Authentication & Role Management
-- 💬 Real-Time Messaging (WebSocket-based)
-- 🧵 Threaded Conversations
-- 🧑‍🤝‍🧑 Team and Channel Management
-- 📎 File Upload & Sharing (with Deduplication)
-- 🔔 Notification Service (In-app + Email)
-- 🔍 Full-text Message Search (ElasticSearch)
-- 📜 Audit Logging and Analytics
-- ⏱️ Rate Limiting & Retry Mechanism
-- 🛠️ Microservices + Event-Driven Architecture
+> Built using React, Express, Flask, PostgreSQL, Kafka, Docker, and Kubernetes.
 
 ---
 
-## ⚙️ Tech Stack
+## 🚀 Features
 
-| Layer | Tech |
-|-------|------|
-| 💻 Frontend | Next.j
-| 🌐 API Gateway | NGINX
-| 🧩 Microservices | Express.js, FastAPI
-| 🔄 Communication | Kafka + REST/gRPC |
-| 🧠 Auth & User | PostgreSQL + Redis |
-| 🗃️ Storage | AWS S3 (for files), RDS (PostgreSQL) |
-| 📊 Search | ElasticSearch |
-| ☸️ Orchestration | Docker + Kubernetes (EKS) |
-| 🔍 Monitoring | Prometheus + Grafana |
-| ✅ CI/CD | GitHub Actions / Jenkins |
+* ✅ User Authentication & Authorization (JWT)
+* ✅ Channel & Team Management
+* ✅ Threaded Conversations
+* ✅ Real-Time Messaging (WebSocket)
+* ✅ File Upload & Sharing (S3 compatible)
+* ✅ In-App & Email Notifications
+* ✅ Full-text Search
+* ✅ Audit Logging
+* ✅ Scalable Microservice Architecture
 
 ---
 
-## 📐 System Architecture
+## 🧰 Tech Stack
 
-> ![Buzzspace Architecture]
-*(Diagram coming soon: includes Kafka, services, S3, Redis, WebSocket, etc.)*
+| Layer         | Tech                     |
+| ------------- | ------------------------ |
+| Frontend      | React, TailwindCSS       |
+| API Gateway   | NGINX                    |
+| Backend       | Express (Node.js), Flask |
+| Database      | PostgreSQL               |
+| Messaging     | Kafka                    |
+| Storage       | AWS S3 or MinIO          |
+| Auth          | JWT, Redis (optional)    |
+| Orchestration | Docker, Kubernetes (K8s) |
+| Monitoring    | Prometheus, Grafana      |
 
 ---
 
-## Microservices Breakdown
+## 📁 Project Structure
 
-1. Authentication Service
+```
+threadly/
+├── docker-compose.yml
+├── .env.example
+├── api-gateway/
+├── frontend/               # React App
+├── infra/                  # Kubernetes manifests, scripts
+├── monitoring/             # Prometheus, Grafana config
+├── services/
+│   ├── auth/               # Express
+│   ├── user-team/          # Express
+│   ├── messaging/          # Flask + WebSocket
+│   ├── file-upload/        # Flask
+│   ├── notification/       # Express
+│   ├── search/             # Flask + ElasticSearch
+│   └── audit-logging/      # Flask
+├── shared/
+└── tests/
+```
 
-        Handles user signup/login
+---
 
-        JWT-based authentication
+## 🛠️ Getting Started
 
-        Role-based access (Admin, Member, Guest)
+### 1. Clone the Repository
 
-        Session management (optional Redis support)
+```bash
+git clone https://github.com/your-username/threadly.git
+cd threadly
+```
 
-        Password reset, email verification (optional)
+### 2. Set Up Environment Variables
 
-        Tech Suggestion: FastAPI + PostgreSQL + Redis (for sessions)
+```bash
+cp .env.example .env
+# Fill in the necessary variables
+```
 
-👥 2. User & Team Management Service
+### 3. Start Services with Docker Compose
 
-        Create and manage teams
+```bash
+docker-compose up --build
+```
 
-        Invite/join users
+> For individual service development, navigate to the specific service folder and run it manually.
 
-        Manage user profile, avatar
+---
 
-        List team members
+## 🔄 Kafka Events Example
 
-        Tech Suggestion: Express + PostgreSQL
+```json
+{
+  "event": "THREAD_MESSAGE_CREATED",
+  "data": {
+    "messageId": "msg_001",
+    "channelId": "ch_101",
+    "parentMessageId": "msg_045",
+    "userId": "user_007",
+    "text": "Great idea! Let's do it."
+  }
+}
+```
 
-🧵 3. Messaging Service (with Thread Support)
+---
 
-        Send/receive messages in real-time
+## 🌐 Deployment
 
-        Threaded replies (via parent_message_id)
+* Docker Compose for local setup
+* Kubernetes manifests for production (infra/k8s)
+* CI/CD via GitHub Actions (coming soon)
 
-        Message editing & deletion
+---
 
-        Seen status
+## 🧠 Contributors
 
-        Tech Suggestion: FastAPI + WebSocket + PostgreSQL + Kafka
+* Nitin - Full Stack Developer (React + Flask)
+* Yatin - Full Stack Developer (Express + Infra)
 
-🪄 4. Notification Service
+---
 
-        Real-time and email notifications
+## 📄 License
 
-        Triggers on:
+MIT License
 
-        Message mentions (@name)
+---
 
-        Replies to threads
+## 🙌 Acknowledgement
 
-        Channel invites
-
-        Kafka consumer
-        Tech Suggestion: Express.js + Kafka + Mailgun / SES API
-
-🧺 5. File Upload Service
-
-        Upload and share media/documents
-
-        Deduplication using file hash
-
-        Stores to AWS S3
-
-        Returns public/private file URLs
-
-        Tech Suggestion: FastAPI + S3 + Hashlib (SHA256) + PostgreSQL
-
-🔍 6. Search Service
-
-        Full-text search on messages
-
-        Search by user, channel, or keyword
-
-        ElasticSearch + Kafka event consumer
-
-        Tech Suggestion: ElasticSearch + FastAPI consumer
-
-📣 7. API Gateway
-
-        Unified entry point for frontend
-
-        Load balancing, routing, rate limiting
-
-        Can log & forward requests to services
-
-        Tech Suggestion: NGINX
-
-📜 8. Audit Logging Service
-
-        Logs every major user action as event
-
-        Kafka consumer that stores logs
-
-        Useful for admin panel and analytics
-
-        Tech Suggestion: Simple Python Kafka consumer + PostgreSQL
-
-
-
+Threadly is an original project focused on learning and building scalable, distributed systems with real-time communication at its core.
