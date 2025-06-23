@@ -23,31 +23,31 @@ Buzzspace is a real-time, event-driven messaging platform built using microservi
 
 ## ⚙️ Tech Stack
 
-| Layer | Tech |
-|-------|------|
-| 💻 Frontend | Next.j
-| 🌐 API Gateway | NGINX
-| 🧩 Microservices | Express.js, FastAPI
-| 🔄 Communication | Kafka + REST/gRPC |
-| 🧠 Auth & User | PostgreSQL + Redis |
-| 🗃️ Storage | AWS S3 (for files), RDS (PostgreSQL) |
-| 📊 Search | ElasticSearch |
-| ☸️ Orchestration | Docker + Kubernetes (EKS) |
-| 🔍 Monitoring | Prometheus + Grafana |
-| ✅ CI/CD | GitHub Actions / Jenkins |
+| Layer            | Tech                                 |
+| ---------------- | ------------------------------------ |
+| 💻 Frontend      | Next.j                               |
+| 🌐 API Gateway   | NGINX                                |
+| 🧩 Microservices | Express.js, FastAPI                  |
+| 🔄 Communication | Kafka + REST/gRPC                    |
+| 🧠 Auth & User   | PostgreSQL + Redis                   |
+| 🗃️ Storage       | AWS S3 (for files), RDS (PostgreSQL) |
+| 📊 Search        | ElasticSearch                        |
+| ☸️ Orchestration | Docker + Kubernetes (EKS)            |
+| 🔍 Monitoring    | Prometheus + Grafana                 |
+| ✅ CI/CD         | GitHub Actions / Jenkins             |
 
 ---
 
 ## 📐 System Architecture
 
 > ![Buzzspace Architecture]
-*(Diagram coming soon: includes Kafka, services, S3, Redis, WebSocket, etc.)*
+> _(Diagram coming soon: includes Kafka, services, S3, Redis, WebSocket, etc.)_
 
 ---
 
 ## Microservices Breakdown
 
-1. Authentication Service
+1.  Authentication Service
 
         Handles user signup/login
 
@@ -141,6 +141,3 @@ Buzzspace is a real-time, event-driven messaging platform built using microservi
         Useful for admin panel and analytics
 
         Tech Suggestion: Simple Python Kafka consumer + PostgreSQL
-
-
-
