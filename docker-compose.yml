@@ -9,6 +9,15 @@ services:
       - .env
     depends_on:
       - db
+  
+  messaging-service:
+    build: ./services/messaging
+    ports:
+      - "5002:5002"
+    env_file:
+      - .env
+    depends_on:
+      - db
 
   db:
     image: postgres:15
