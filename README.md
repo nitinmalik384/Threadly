@@ -111,13 +111,6 @@ docker-compose up --build
 
 ---
 
-## 🧠 Contributors
-
-* Nitin - Full Stack Developer (React + Flask)
-* Yatin - Full Stack Developer (Express + Infra)
-
----
-
 ## 📄 License
 
 MIT License
