@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from db import SessionLocal, engine
 from models import Base, Message, Channel
 from flask_cors import CORS
+from flask_socketio import SocketIO, emit
 
 
 # DB Table create karna (only first time - auto migrate)
@@ -9,6 +10,7 @@ Base.metadata.create_all(bind=engine)
 
 app = Flask(__name__)
 CORS(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Health check
 @app.route('/api/messaging/health', methods=['GET'])
@@ -21,6 +23,7 @@ def send_message():
     session = SessionLocal()
     data = request.get_json()
 
+
     try:
         new_message = Message(
             user_id=data['user_id'],
@@ -30,6 +33,14 @@ def send_message():
         )
         session.add(new_message)
         session.commit()
+        socketio.emit('new_message', {
+            'id': new_message.id,
+            'user_id': new_message.user_id,
+            'channel_id': new_message.channel_id,
+            'content': new_message.content,
+            'parent_message_id': new_message.parent_message_id,
+            'created_at': str(new_message.created_at)
+        })
 
         return jsonify({"message": "Message sent successfully"}), 201
 
@@ -45,12 +56,13 @@ def send_message():
 def get_channel_messages(channel_id):
     session = SessionLocal()
     try:
-        messages = session.query(Message).filter_by(channel_id=channel_id).all()
+        messages = session.query(Message).filter_by(channel_id=channel_id, parent_message_id=None).all()
         result = [{
             "id": m.id,
             "user_id": m.user_id,
             "content": m.content,
             "parent_message_id": m.parent_message_id,
+            "channel_id": m.channel_id,
             "created_at": m.created_at.isoformat()
         } for m in messages]
 
@@ -110,4 +122,4 @@ def create_channel():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5002, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5002)

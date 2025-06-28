@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import ChannelView from "./pages/ChannelView"; 
+import Home from "./pages/Home"; 
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/channel" element={<ChannelView />} />
+        <Route path="/channel" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
