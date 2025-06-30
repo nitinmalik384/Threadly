@@ -10,7 +10,7 @@ const ChannelView = ({channelId}) => {
   const userId = 2; // Hardcoded, baad me auth se aayega
   const [messages, setMessages] = useState([]);
 
-  console.log('ChannelView rendered with channelId:', messages);
+  // console.log('ChannelView rendered with channelId:', messages);
 
   const fetchMessages = async () => {
     const data = await getChannelMessages(channelId);
@@ -21,7 +21,7 @@ const ChannelView = ({channelId}) => {
     fetchMessages();
     socket.on('new_message', (data) => {
       if (data.channel_id === channelId) {
-        console.log('New message received:', data);
+        // console.log('New message received:', data);
         fetchMessages();
       }
     });
@@ -39,7 +39,7 @@ const ChannelView = ({channelId}) => {
   const [selectedThreadMessage, setSelectedThreadMessage] = useState(null);
 
   const handleMessageClick = (msg) => {
-    console.log('msg clicked:', msg);
+    // console.log('msg clicked:', msg);
     setSelectedThreadMessage(msg);
   };
 

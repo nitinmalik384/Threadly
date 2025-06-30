@@ -47,12 +47,12 @@ threadly/
 ├── infra/                  # Kubernetes manifests, scripts
 ├── monitoring/             # Prometheus, Grafana config
 ├── services/
-│   ├── auth/               # Express
+│   ├── auth/               # Flask
 │   ├── user-team/          # Express
 │   ├── messaging/          # Flask + WebSocket
 │   ├── file-upload/        # Flask
-│   ├── notification/       # Express
-│   ├── search/             # Flask + ElasticSearch
+│   ├── notification/       # Flask + Apache Kafka
+│   ├── search/             # express + ElasticSearch
 │   └── audit-logging/      # Flask
 ├── shared/
 └── tests/

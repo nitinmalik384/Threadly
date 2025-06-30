@@ -5,3 +5,5 @@ SQLAlchemy
 psycopg2-binary
 python-dotenv
 flask-cors
+kafka-python
+python-dotenv

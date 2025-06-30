@@ -15,7 +15,7 @@ const ThreadView = ({ parentMessage, onClose }) => {
   }, [parentMessage.id]);
 
   const handleReplySend = async (payload) => {
-    console.log('Sending reply:', payload, parentMessage);
+    // console.log('Sending reply:', payload, parentMessage);
     await axios.post('http://localhost:5002/api/messaging/send', payload);
     fetchReplies();
   };

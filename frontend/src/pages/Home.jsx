@@ -4,7 +4,7 @@ import ChannelView from './ChannelView';
 
 function Home() {
   const [selectedChannel, setSelectedChannel] = useState(null);
-  console.log("selectedChannel: ", selectedChannel);
+  // console.log("selectedChannel: ", selectedChannel);
 
   return (
     <div style={{ display: "flex" }}>
